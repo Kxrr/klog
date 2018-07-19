@@ -16,6 +16,10 @@ func Errorf(template string, args ...interface{}) {
 	defaultLogger.Errorf(template, args...)
 }
 
+func Fatalf(template string, args ...interface{}) {
+	defaultLogger.Fatalf(template, args...)
+}
+
 func Configure(name string, prefix string, output io.Writer) {
 	defaultLogger.Configure(name, prefix, output)
 }

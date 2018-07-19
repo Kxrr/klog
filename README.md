@@ -13,7 +13,6 @@ import (
 )
 
 func main() {
-	// log.Configure("foo", "Foo - ", os.Stdout)
 	log.Printf("hello, world")
 }
 ```

@@ -33,7 +33,6 @@ func (l *Logger) Configure(name string, prefix string, output io.Writer) {
 func (l *Logger) Printf(template string, args ...interface{}) {
 	l.maybeConfigure()
 	l.opLogger.Infof(template, args...)
-
 }
 
 func (l *Logger) Debugf(template string, args ...interface{}) {
@@ -44,6 +43,11 @@ func (l *Logger) Debugf(template string, args ...interface{}) {
 func (l *Logger) Errorf(template string, args ...interface{}) {
 	l.maybeConfigure()
 	l.opLogger.Errorf(template, args...)
+}
+
+func (l *Logger) Fatalf(template string, args ...interface{})  {
+	l.maybeConfigure()
+	l.opLogger.Fatalf(template, args...)
 }
 
 

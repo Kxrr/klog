@@ -2,19 +2,28 @@ package klog
 
 import (
 	"testing"
-	"os"
+	"bytes"
+	"regexp"
 )
 
-func TestConfiguredWhenCallDefaultLoggerMethod(t *testing.T) {
+func TestAutoConfigured(t *testing.T) {
 	if defaultLogger.configured != false {
 		t.Fatalf("Expect default defaultLogger not be configured")
 	}
-	Printf("hello, world from test")
+	Printf("foo")
 	if defaultLogger.configured != true {
 		t.Fatalf("Expect default defaultLogger be configured after call Printf")
 	}
+	Printf("bar")
+
 }
 
 func TestConfigure(t *testing.T) {
-	Configure("Test", "Test", os.Stdout)
+	buf := bytes.Buffer{}
+	Configure("Test", "Test - ", &buf)
+	Printf("baz")
+	r := regexp.MustCompile("Test - .*baz")
+	if !r.Match(buf.Bytes()) {
+		t.Fatalf("Incorrect output: %#v", buf.String())
+	}
 }
