@@ -1,8 +1,18 @@
 package klog
 
-import "io"
+import (
+	"io"
+	opLogging "github.com/op/go-logging"
+)
 
-var defaultLogger = Logger{}
+var defaultLogger = NewLogger()
+
+func NewLogger() *KLogger {
+	return &KLogger{
+		&opLogging.Logger{},
+		false,
+	}
+}
 
 func Printf(template string, args ...interface{}) {
 	defaultLogger.Printf(template, args...)
@@ -20,6 +30,6 @@ func Fatalf(template string, args ...interface{}) {
 	defaultLogger.Fatalf(template, args...)
 }
 
-func Configure(name string, prefix string, output io.Writer) {
-	defaultLogger.Configure(name, prefix, output)
+func Configure(name string, prefix string, timeFormat string, output io.Writer) {
+	defaultLogger.Configure(name, prefix, timeFormat, output)
 }
